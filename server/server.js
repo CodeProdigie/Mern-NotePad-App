@@ -1,11 +1,21 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
+import connectDB from "./config/database.js";
+import NotesRoute from "./Routes/NotesRoute.js"
 
-dotenv.config
+dotenv.config()
+const app = express();
 
-const port = process.env.PORT || 4000
+connectDB()
 
-const app = express()
+app.use(cors())
+app.use(express.json())
+
+app.use("/api/notes",NotesRoute)
 
 
-app.listen(port, ()=> console.log(`server is running on port: ${port}`))
+
+const port = process.env.PORT || 8000;
+
+app.listen(port, ()=> console.log(`App running on port ${port}`))

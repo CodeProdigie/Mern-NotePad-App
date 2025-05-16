@@ -1,39 +1,28 @@
-import { useState } from "react";
-import { getGeminiResponse } from "./gemini";
+import  { ToastContainer,toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import "./boxicons/css/boxicons.min.css"
+import CreateNote from "./pages/CreateNote";
+import EditNotes from "./pages/EditNotes";
+import ViewNotes from "./pages/ViewNotes";
+
+
+
 
 const App = () => {
-  const [response, setResponse] = useState("");
-  const [question, setQuestion] = useState("");
-
-  const QuestionFunction = (e) => {
-    setQuestion(e.target.value);
-  };
-
-  const sendData = async () => {
-    const result = await getGeminiResponse(question);
-    setResponse(result);
-  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[100vh]">
-      <div className="flex">
-        <input
-          type="text"
-          value={question}
-          onChange={QuestionFunction}
-          className="py-1 px-4 rounded text-xl text-blue-500 border border-gray-600"
-          placeholder="Enter prompt"
-        />
-        <button
-          onClick={sendData}
-          className="py-1 px-3 bg-blue-600 text-white cursor-pointer"
-        >
-          Send
-        </button>
-      </div>
-      <p>{response}</p>
-    </div>
-  );
-};
+    <Router>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/create" element={<CreateNote />} />
+        <Route path="/edit/:id" element={<EditNotes />} />
+        <Route path="/view/:id" element={<ViewNotes />} />
+      </Routes>
+    </Router>
+  )
+}
 
-export default App;
+export default App 
