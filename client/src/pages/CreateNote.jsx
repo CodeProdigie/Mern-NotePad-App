@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+
 const CreateNote = () => {
     const [notes, setNotes] = useState({title: '', content: '', date: Date})
     const navigate = useNavigate()
@@ -11,7 +12,7 @@ const CreateNote = () => {
     const CreateNotes = async (e) => {
         e.preventDefault();
          try {
-             const response =  await fetch("http://localhost:8000/api/notes",{
+             const response =  await fetch(`${import.meta.env.VITE_API_URL}/api/notes`,{
         method:'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(notes)
