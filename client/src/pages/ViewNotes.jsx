@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 
+
 const ViewNotes = () => {
     const [notes, setNotes] = useState([]);
     const { id } = useParams()
       useEffect(()=>{
         const fetchNotes = async () => {
-          const AllNotes = await fetch(`http://localhost:8000/api/notes/${id}`);
+          const AllNotes = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`);
           const data =await AllNotes.json();
           setNotes(data)
     
