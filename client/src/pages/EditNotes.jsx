@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify";
 
+
 const EditNotes = () => {
     const [notes, setNotes] = useState({title: '', content: '', date: ''})
     const { id } = useParams()
     const navigate = useNavigate()
       useEffect(()=>{
         const fetchNotes = async () => {
-          const AllNotes = await fetch(`http://localhost:8000/api/notes/${id}`);
+          const AllNotes = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`);
           const data =await AllNotes.json();
           setNotes(data)
     
@@ -21,7 +22,7 @@ const EditNotes = () => {
       const UpdateNotes = async (e) => {
               e.preventDefault();
                try {
-                   const response =  await fetch(`http://localhost:8000/api/notes/${id}`,{
+                   const response =  await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`,{
               method:'PUT',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify(notes)
