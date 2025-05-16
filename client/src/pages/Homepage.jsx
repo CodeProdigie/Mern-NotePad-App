@@ -6,7 +6,7 @@ const Homepage = () => {
   const [notes, setNotes] = useState([]);
   useEffect(()=>{
     const fetchNotes = async () => {
-      const AllNotes = await fetch("http://localhost:8000/api/notes");
+      const AllNotes = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`);
       const data =await AllNotes.json();
       setNotes(data)
     }
@@ -18,7 +18,7 @@ const Homepage = () => {
       if(!confirmDelete) return
       try {
          const Deleting = async () => {
-            const response = await fetch(`http://localhost:8000/api/notes/${id}`,{
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`,{
               method: 'DELETE'
             })
             if(response.ok){
