@@ -13,7 +13,9 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/notes",NotesRoute)
-
+app.get("/", (req, res) => {
+  res.json({ message: "Running" });
+});
 
 
 const port = process.env.PORT || 8000;
